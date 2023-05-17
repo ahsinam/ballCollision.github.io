@@ -1,0 +1,15 @@
+#container {
+    width: 600px;
+    height: 600px;
+    border: 3px solid black;
+    margin: 0 auto;
+    position: relative;
+}
+
+.ball {
+    height: 40px;
+    width: 40px;
+    background-color: pink;
+    border-radius: 50%;
+    position: absolute;
+}
