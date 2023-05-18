@@ -20,6 +20,7 @@ const rotate = (velocityX, velocityY, angle) => {
 
   return rotatedVelocities;
 };
+let interval = null;
 
 const balls = [
   {
@@ -105,6 +106,12 @@ class BallCollisionGame {
     this.mass = mass;
   }
 
+  resetTimer = (interval) => {
+    if (interval) {
+      clearInterval(interval);
+    }
+    interval = setInterval(this.moveBall, 100);
+  };
   generateRandomNumber = (maxLimit = 200) => {
     let xRandom = Math.floor(Math.random() * maxLimit);
     let yRandom = Math.floor(Math.random() * maxLimit);
@@ -123,6 +130,7 @@ class BallCollisionGame {
     oneBall.appendChild(ballElement);
     mainContainer.appendChild(oneBall);
   };
+
   resolveCollision = (particle, otherParticle) => {
     const xVelocityDiff = this.dx - otherParticle.dx;
     const yVelocityDiff = this.dy - otherParticle.dy;
@@ -161,7 +169,6 @@ class BallCollisionGame {
 
       otherParticle.dx = vFinal2.x;
       otherParticle.dy = vFinal2.y;
-      clearInterval();
     }
   };
 
@@ -200,7 +207,7 @@ class BallCollisionGame {
 
   init = () => {
     this.drawBall(this.x, this.y);
-    setInterval(() => {
+    interval = setInterval(() => {
       this.moveBall();
     }, 100);
   };
